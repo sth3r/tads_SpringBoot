@@ -1,17 +1,26 @@
 package br.edu.ifsul.ctsi.esther_tads.anotacao;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
+import br.edu.ifsul.ctsi.esther_tads.dia.Dia;
 
-@Entity
+import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
+@Entity(name="Anotacao")
+@Table(name = "anotacaos")
+@NoArgsConstructor
+@AllArgsConstructor
+@Getter
+@Setter
 public class Anotacao {
-    @Id @GeneratedValue
+    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String titulo;
     private String conteudo;
+
+    @ManyToOne
+    @JoinColumn(name = "dia_id", referencedColumnName = "id", nullable = false)
+    private Dia dia;
 }
-
-
-
-
