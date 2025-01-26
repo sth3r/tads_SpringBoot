@@ -1,5 +1,7 @@
 package br.edu.ifsul.ctsi.esther_tads.usuario;
 
+import br.edu.ifsul.ctsi.esther_tads.dia.Dia;
+
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -33,6 +35,10 @@ public class Usuario implements UserDetails {
             joinColumns = @JoinColumn(name = "usuarios_id", referencedColumnName = "id"),
             inverseJoinColumns = @JoinColumn(name = "perfis_id", referencedColumnName = "id"))
     private List<Perfil> perfis;
+
+    //um usario pode ter varios dias
+    @OneToMany(mappedBy = "usuario", fetch = FetchType.EAGER)
+    private Collection<Dia> dias;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
