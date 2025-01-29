@@ -4,8 +4,9 @@ import java.io.Serializable;
 
 public record AnotacaoDto(
         String titulo,
-        String conteudo)  implements Serializable {
+        String conteudo,
+        Long dia_id)  implements Serializable {
     public AnotacaoDto(Anotacao anotacao) {
-        this(anotacao.getTitulo(), anotacao.getConteudo());
+        this(anotacao.getTitulo(), anotacao.getConteudo(), anotacao.getId());
     }
 }

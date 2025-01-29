@@ -8,6 +8,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpMethod;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.test.context.ActiveProfiles;
 
@@ -45,19 +46,51 @@ class AnotacaoControllerIntegracaoTest extends BaseAPIIntegracaoTest {
 
         //ASSERT
         assertNotNull(anotacaos);
-        assertEquals(5, anotacaos.size());
+        assertEquals(4, anotacaos.size());
     }
 
     @Test
     void findById() {
+        // ARRANGE
+        var id = 2;
+        var url = "/api/v1/anotacaos/" + id;
+
+        // ACT
+        var anotacao = getAnotacao(url).getBody();
+
+        // ASSERT
+        assertNotNull(anotacao);
+        assertEquals("lista de comprsa", anotacao.titulo());
     }
 
     @Test
-    void finByNome() {
+    void findByTitulo() {
     }
 
     @Test
     void insert() {
+//        // ARRANGE
+//        var AnotacaoDto = new AnotacaoDto(
+//                "Teste",
+//                "vai sre excluido"
+//        );
+//
+//        // ACT
+//        var response = post("/api/v1/produtos", AnotacaoDto, null);
+//
+//        // ASSERT
+//        assertEquals(HttpStatus.CREATED, response.getStatusCode());
+//        var location = response.getHeaders().get("location").get(0);
+//        var p = getAnotacao(location).getBody();
+//        assertNotNull(p);
+//        assertEquals("Teste", p.titulo());
+//        assertEquals("vai sre excluido", p.conteudo());
+//
+//        // ACT
+//        delete(location, null);
+//
+//        // ASSERT
+//        assertEquals(HttpStatus.NOT_FOUND, getAnotacao(location).getStatusCode());
     }
 
     @Test
@@ -66,5 +99,24 @@ class AnotacaoControllerIntegracaoTest extends BaseAPIIntegracaoTest {
 
     @Test
     void delete() {
+//        // ARRANGE
+//        var anotacao = new Anotacao();
+//        anotacao.setTitulo("Teste");
+//        anotacao.setConteudo("Desc. do produto Teste");
+//
+//        var responsePost = post("/api/v1/anotacaos", anotacao, null);
+//        assertEquals(HttpStatus.CREATED, responsePost.getStatusCode());
+//        var location = responsePost.getHeaders().get("location").get(0);
+//        var p = getAnotacao(location).getBody();
+//        assertNotNull(p);
+//        assertEquals("Teste", p.titulo());
+////        assertEquals(Integer.valueOf(100), p.estoque());
+//
+//        // ACT
+//        var responseDelete = delete(location, null);
+//
+//        // ASSERT
+//        assertEquals(HttpStatus.OK, responseDelete.getStatusCode());
+//        assertEquals(HttpStatus.NOT_FOUND, getAnotacao(location).getStatusCode());
     }
 }

@@ -8,8 +8,6 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.util.Collection;
-
 @Entity(name="Anotacao")
 @Table(name = "anotacaos")
 @NoArgsConstructor

@@ -13,7 +13,7 @@ values (1, 'Admin', 'do Sistema', 'admin@email.com', '$2a$10$HKveMsPlst41Ie2LQgp
  insert into usuarios_perfis(usuarios_id, perfis_id)
  values (2, 2);
 
- insert into token_confirmacao_email(id, data_de_criacao, token, usuario_id) value (1,'2024-05-02 10:00','aecc73b7-dae5-4011-925d-e07633d9993f',1);
+--  insert into token_confirmacao_email(id, data_de_criacao, token, usuario_id) value (1,'2024-05-02 10:00','aecc73b7-dae5-4011-925d-e07633d9993f',1);
 
 INSERT INTO dias (id, data, usuario_id)
 VALUES (1, '2025-01-26', 1),

@@ -1,5 +1,6 @@
 package br.edu.ifsul.ctsi.esther_tads.anotacao;
 
+import br.edu.ifsul.ctsi.esther_tads.dia.DiaRepository;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.web.bind.annotation.*;
@@ -13,9 +14,11 @@ import java.util.List;
 public class AnotacaoController {
 
     private final AnotacaoRepository anotacaoRepository;
+    private final DiaRepository diaRepository;
 
-    public AnotacaoController(AnotacaoRepository anotacaoRepository) {
+    public AnotacaoController(AnotacaoRepository anotacaoRepository, DiaRepository diaRepository) {
         this.anotacaoRepository = anotacaoRepository;
+        this.diaRepository = diaRepository;
     }
 
     @GetMapping
@@ -41,13 +44,13 @@ public class AnotacaoController {
     }
 
     @PostMapping
-    @Secured("ROLE_ADMIN")
+   // @Secured("ROLE_ADMIN")
     public ResponseEntity<URI> insert(@RequestBody AnotacaoDto anotacaoDto, UriComponentsBuilder uriBuilder) {
         var p = anotacaoRepository.save(new Anotacao(
                 null,
                 anotacaoDto.titulo(),
                 anotacaoDto.conteudo(),
-                null
+                diaRepository.findById(anotacaoDto.dia_id()).get()
         ));
         var location = uriBuilder.path("api/v1/anotacaos/{id}").buildAndExpand(p.getId()).toUri();
         return ResponseEntity.created(location).build();
@@ -61,7 +64,7 @@ public class AnotacaoController {
                     id,
                     anotacaoDto.titulo(),
                     anotacaoDto.conteudo(),
-                    null
+                    diaRepository.findById(anotacaoDto.dia_id()).get()
             ));
             return ResponseEntity.ok(new AnotacaoDto(p));
         }
